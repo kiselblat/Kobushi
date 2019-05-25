@@ -4,10 +4,23 @@
    $.ajax({
     url : queryURL,
     method : "GET"
-   }).then(function(response) {
-    console.log(response);
-    console.log(response.results[0].title);
-   })
+   }).then(getResults);
  };
+
+ var getResults = function(reply) {
+   var searchResults = reply.results;
+   console.log(searchResults);
+   for (var i = 0 ; i < searchResults.length ; i++) {
+     displayResults(searchResults[i]);
+   }
+ }
+
+ var displayResults = function(result) {
+   console.log("------------------------");
+   console.log(result.title);
+   console.log(result.image_url);
+   console.log(result.synopsis);
+   console.log("------------------------");
+ }
 
  performSearch();
