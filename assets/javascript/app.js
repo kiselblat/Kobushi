@@ -21,12 +21,11 @@ var getResults = function (reply) {
 
 // displayResults() to the console (needs to be to the document)
 var displayResults = function (result) {
-  console.log("------------------------");
-  console.log(result.title);
-  console.log(result.image_url);
-  console.log(result.synopsis);
+  // console.log("------------------------");
+  // console.log(result.title);
+  // console.log(result.image_url);
+  // console.log(result.synopsis);
   var image = $("<img>").attr("src", result.image_url);
-  console.log(image);
   // Create the new row
   var newRow = $("<tr>").append(
     $("<td>").text(result.image_url),
@@ -36,11 +35,17 @@ var displayResults = function (result) {
 
   // Append the new row to the table
   $("table").append(newRow);
-  $("<br>");
 
 };
 
 $(document).ready(function () {
-  searchTerm = "Naruto"
-  performSearch(searchTerm, searchLimit);
+  $("button").unbind().click(function (event) {
+    event.preventDefault();
+    newSearch = $("#search").val().trim();
+    console.log(newSearch);
+    performSearch(newSearch, searchLimit);
+  });
+
+  // searchTerm = "Ghost in the Shell"
+  // performSearch(searchTerm, searchLimit);
 });
