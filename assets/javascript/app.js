@@ -40,7 +40,7 @@ $(document).ready(function () {
     console.log(image);
     // Create the new row
     var newRow = $("<tr>").append(
-      $("<td>").text(result.image),
+      $("<td>").append(image),
       $("<td>").text(result.title),
       $("<td>").text(result.synopsis),
     );
