@@ -1,6 +1,5 @@
 $(document).ready(function () {
 
-  var searchTerm = "";
   var searchLimit = 5;
 
   // function to search the jikan api for Naruto and log the object and title of the first hit
@@ -11,6 +10,22 @@ $(document).ready(function () {
       method: "GET"
     }).then(getResults);
   };
+
+  var youtubeSearch = function () {
+    var queryURL = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=Australia&key=AIzaSyCHbM4yqSNt5FqVSFSFiMv4IaX7jxQxPJ0";
+    $.ajax({
+      url: queryURL,
+      method: "GET"
+    }).then(function(vidResponse){
+      var data = vidResponse.items[0];
+      var video = $("<iframe>");
+      video.attr('src', 'https://www.youtube.com/embed/' + data.id.videoId)
+      video.attr('height', "506")
+      video.attr('width', "900")
+      $('body').append(video);
+    });
+  };
+  youtubeSearch();
 
   // Take in JSON response from performSearch() and parse out the searchResults
   var getResults = function (reply) {
@@ -29,18 +44,15 @@ $(document).ready(function () {
   );
   $("table").append(headerRow);
 
-  // displayResults() to the console (needs to be to the document)
+  // displayResults() to the page
   var displayResults = function (result) {
-    // console.log("------------------------");
-    // console.log(result.title);
-    // console.log(result.image_url);
-    // console.log(result.synopsis);
     var imgURL = result.image_url;
     var image = $("<img>").attr("src", imgURL);
-    console.log(image);
+    image.attr("title", result.title);
+
     // Create the new row
     var newRow = $("<tr>").append(
-      $("<td>").append(image),
+      $('<td id="newPage">').append(image),
       $("<td>").text(result.title),
       $("<td>").text(result.synopsis),
     );
@@ -51,6 +63,9 @@ $(document).ready(function () {
 
   };
 
+  $("#newPage").click(console.log("function"));
+
+
   $("button").unbind().click(function (event) {
     event.preventDefault();
     newSearch = $("#search").val().trim();
@@ -58,6 +73,4 @@ $(document).ready(function () {
     performSearch(newSearch, searchLimit);
   });
 
-  // searchTerm = "Ghost in the Shell"
-  // performSearch(searchTerm, searchLimit);
 });
