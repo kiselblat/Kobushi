@@ -1,7 +1,9 @@
 $(document).ready(function () {
 
-  var searchTerm = "";
+  // var searchTerm = "";
   var searchLimit = 5;
+
+  var validSearches = [];
 
   // function to search the jikan api for Naruto and log the object and title of the first hit
   var performSearch = function (term, limit) {
@@ -17,8 +19,10 @@ $(document).ready(function () {
     var searchResults = reply.results;
     console.log(searchResults);
     for (var i = 0; i < searchResults.length; i++) {
+      validSearches.push(searchResults[i].title);
       displayResults(searchResults[i]);
     }
+    console.log(validSearches);
   };
 
   //column titles for the table
@@ -56,6 +60,10 @@ $(document).ready(function () {
     newSearch = $("#search").val().trim();
     console.log(newSearch);
     performSearch(newSearch, searchLimit);
+  });
+
+  $( "#search" ).autocomplete({
+    source: validSearches
   });
 
   // searchTerm = "Ghost in the Shell"
