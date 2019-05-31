@@ -24,7 +24,7 @@ $(document).ready(function () {
   //column titles for the table
   var headerRow = $("<th>").append(
     $("<td>").text("Poster"),
-    $("<td>").text("Title"),
+    // $("<td>").text("Title"),
     $("<td>").text("Synopsis"),
   );
   $("table").append(headerRow);
@@ -40,14 +40,13 @@ $(document).ready(function () {
     console.log(image);
     // Create the new row
     var newRow = $("<tr>").append(
-      $("<td>").append(image),
-      $("<td>").text(result.title),
-      $("<td>").text(result.synopsis),
+      $("<td class='imgurl'>").append(image).append($('<br>')).prepend(result.title),
+      $("<td class='textBox'>").text(result.synopsis),
     );
 
     // Append the new row to the table
     $("table").prepend(newRow);
-    $("table").prepend("<tr><td><br>");
+    // $("table").prepend("<tr><td><br>");
 
   };
 
