@@ -1,10 +1,37 @@
-$(document).ready(function () {
+var autoTest = ["ABC" , "DEF" , "GHI"]
 
+var firebaseConfig = {
+  apiKey: "AIzaSyAALSQ2KT7EvjWnvSkccuWLvEosnsMAbZs",
+  authDomain: "kobushi-persistant-storage.firebaseapp.com",
+  databaseURL: "https://kobushi-persistant-storage.firebaseio.com",
+  projectId: "kobushi-persistant-storage",
+  storageBucket: "kobushi-persistant-storage.appspot.com",
+  messagingSenderId: "758341876715",
+  appId: "1:758341876715:web:1790bc44f1647cfb"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+var database = firebase.database();
+
+var validSearches = [];
+// var validSearches = database.ref().val().validTerms;
+console.log(validSearches);
+
+database.ref().on('value' , function(snapshot){
+  validSearches = snapshot.val().validTerms;
+  $( "#search" ).autocomplete({
+    source: validSearches
+  });
+  
+  console.log(validSearches);
+});
+
+$(document).ready(function () {
+  
   // var searchTerm = "";
   var searchLimit = 5;
-
-  var validSearches = [];
-
+  
+  
   // function to search the jikan api for Naruto and log the object and title of the first hit
   var performSearch = function (term, limit) {
     var queryURL = "https://api.jikan.moe/v3/search/anime?q=" + term + "&limit=" + limit;
@@ -19,9 +46,14 @@ $(document).ready(function () {
     var searchResults = reply.results;
     console.log(searchResults);
     for (var i = 0; i < searchResults.length; i++) {
-      validSearches.push(searchResults[i].title);
+      if (!validSearches.includes) {
+        validSearches.push(searchResults[i].title);    
+      }
       displayResults(searchResults[i]);
     }
+    database.ref().set({
+      validTerms : validSearches
+    })
     console.log(validSearches);
   };
 
@@ -62,9 +94,6 @@ $(document).ready(function () {
     performSearch(newSearch, searchLimit);
   });
 
-  $( "#search" ).autocomplete({
-    source: validSearches
-  });
 
   // searchTerm = "Ghost in the Shell"
   // performSearch(searchTerm, searchLimit);
