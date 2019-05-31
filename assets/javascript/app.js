@@ -23,9 +23,9 @@ $(document).ready(function () {
 
   //column titles for the table
   var headerRow = $("<th>").append(
-    $("<td>").text("Poster"),
-    // $("<td>").text("Title"),
-    $("<td>").text("Synopsis"),
+    // $("<td>").text("Poster"),
+    // // $("<td>").text("Title"),
+    // $("<td>").text("Synopsis"),
   );
   $("table").append(headerRow);
 
