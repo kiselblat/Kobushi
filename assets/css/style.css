@@ -1,10 +1,40 @@
+body{
+    background-image: url("../images/XGmsyMM-pikachu-backgrounds.jpg") !important;
+    background-size:cover;
+}
 .jumbotron{
     text-align: center;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    margin-top: 10%;
+    border-radius: 50%;
+    background-color: black !important;
+    color: white !important;
 }
+
+
 .container{
     text-align: center;
 }
 
-button {
+
+td{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    box-shadow: 0px 0px 14px 0px #d8d8d8;
+    text-align:left;
+    padding-left: 4%;
 }
+
+tr{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    margin-bottom:15px;
+}
+
+.imgurl{
+    text-align: center;
+    padding: 4%;
+}
+
+
+/* .textBox{
+} */
 
