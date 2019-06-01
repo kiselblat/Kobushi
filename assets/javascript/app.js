@@ -74,13 +74,13 @@ $(document).ready(function () {
     var image = $("<img>").attr("src", imgURL);
     console.log(image);
     // Create the new row
-    var newRow = $("<tr>").append(
-      $("<td class='imgurl'>").append(image).append($('<br>')).prepend(result.title),
-      $("<td class='textBox'>").text(result.synopsis),
+    var newRow = $("<div class='row'>").append(
+      $("<div class='col-md-6'>").append($("<div class='imgurl'>").append(result.title, "<br>", image)),
+      $("<div class='col-md-6'>").append($("<div class='textBox'>").text(result.synopsis)),
     );
 
     // Append the new row to the table
-    $("table").prepend(newRow);
+    $(".results-display").prepend(newRow);
     // $("table").prepend("<tr><td><br>");
 
   };
