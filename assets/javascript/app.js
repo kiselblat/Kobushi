@@ -83,24 +83,26 @@ $(document).ready(function () {
 
   // displayResults() to the console (needs to be to the document)
   var displayResults = function (result) {
-  var imgURL = result.image_url;
-  var image = $("<img>").attr("src", imgURL);
-  var youtube = "Watch trailer on Youtube";
-  var ebay = "Search eBay for DVD";
-    console.log(image);
-    // Create the new row
-    var newRow = $("<div class='row'>").append(
-      $("<div class='col-md-6'>")
-        .attr("title", result.title)
-        .click(function(event){
-          if(event.target.title){
-          newTitle = this.title + " trailer";
-          console.log(newTitle);
-          youtubeSearch();
-          })
-        .append($("<div class='imgurl'>").append(result.title, "<br>", image)),
-      $("<div class='col-md-6'>").append($("<div class='textBox'>").text(result.synopsis)),
-    );
+    var imgURL = result.image_url;
+    var image = $("<img>").attr("src", imgURL);
+    var youtube = "Watch trailer on Youtube";
+    var ebay = "Search eBay for DVD";
+      console.log(image);
+      // Create the new row
+      var newRow = $("<div class='row'>").append(
+        $("<div class='col-md-6'>")
+          .attr("title", result.title)
+          .click(function(event) {
+            if(event.target.title){
+              newTitle = this.title + " trailer";
+              console.log(newTitle);
+              }
+            youtubeSearch();
+            })
+          .append($("<div class='imgurl'>"))
+          .append(result.title, "<br>", image),
+        $("<div class='col-md-6'>").append($("<div class='textBox'>").text(result.synopsis)),
+      );
 
     // Append the new row to the table
     $(".results-display").prepend(newRow);
