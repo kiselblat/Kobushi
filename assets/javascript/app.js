@@ -1,5 +1,3 @@
-var autoTest = ["ABC" , "DEF" , "GHI"]
-
 var firebaseConfig = {
   apiKey: "AIzaSyAALSQ2KT7EvjWnvSkccuWLvEosnsMAbZs",
   authDomain: "kobushi-persistant-storage.firebaseapp.com",
@@ -14,15 +12,14 @@ firebase.initializeApp(firebaseConfig);
 var database = firebase.database();
 
 var validSearches = [];
-// var validSearches = database.ref().val().validTerms;
-console.log(validSearches);
+// console.log(validSearches);
 
 database.ref().on('value' , function(snapshot){
   validSearches = snapshot.val().validTerms;
   $( "#search" ).autocomplete({
     source: validSearches
   });
-  console.log(validSearches);
+  // console.log(validSearches);
 });
 
 $(document).ready(function () {
@@ -53,13 +50,13 @@ $(document).ready(function () {
     database.ref().set({
       validTerms : validSearches
     })
-    console.log(validSearches);
+    // console.log(validSearches);
   };
 
   //column titles for the table
   var headerRow = $("<th>").append(
     // $("<td>").text("Poster"),
-    // // $("<td>").text("Title"),
+    // $("<td>").text("Title"),
     // $("<td>").text("Synopsis"),
   );
   $("table").append(headerRow);
@@ -85,7 +82,7 @@ $(document).ready(function () {
 
   };
 
-  $("button").unbind().click(function (event) {
+  $("#search-button").unbind().click(function (event) {
     event.preventDefault();
     newSearch = $("#search").val().trim();
     console.log(newSearch);
