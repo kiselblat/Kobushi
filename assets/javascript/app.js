@@ -68,18 +68,10 @@ $(document).ready(function () {
     var video = $("<iframe>");
     video.attr('src', 'https://www.youtube.com/embed/' + data.id.videoId)
     video.attr('height', "506")
-    video.attr('width', "2900")
-    $('table').prepend(video);
+    video.attr('width', "900")
+    $('.results-display').prepend(video);
   });
 };
-
-  //column titles for the table
-  var headerRow = $("<th>").append(
-    // $("<td>").text("Poster"),
-    // $("<td>").text("Title"),
-    // $("<td>").text("Synopsis"),
-  );
-  $("table").append(headerRow);
 
   // displayResults() to the console (needs to be to the document)
   var displayResults = function (result) {
@@ -106,8 +98,6 @@ $(document).ready(function () {
 
     // Append the new row to the table
     $(".results-display").prepend(newRow);
-    // $("table").prepend("<tr><td><br>");
-
   };
 
   $("#search-button").unbind().click(function (event) {
