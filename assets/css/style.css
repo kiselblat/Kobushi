@@ -3,6 +3,7 @@ body{
     background-color:black !important;
     background-size:cover;
 }
+
 .jumbotron{
     text-align: center;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
@@ -11,15 +12,10 @@ body{
     color: black !important;
 }
 
-h1{
-
-}
-
 .imgurl{
     font-size: 20px;
-    font-weight: bold;
-    color:white;
-
+    font-family: 'Franklin Gothic Medium', 'Arial', Arial, sans-serif;
+    color:whitesmoke;
 
 }
 
@@ -27,7 +23,7 @@ h1{
     margin-top: 100px;
     background: #ffffff;
     border-radius: 20px;
-    
+    color:rgba(36, 36, 36, 0.678);
 
 
 }
@@ -53,8 +49,6 @@ tr{
     text-align: center;
     padding: 4%;
 }
-
-
 /* .textBox{
 } */
 
