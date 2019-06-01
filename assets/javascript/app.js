@@ -1,7 +1,6 @@
 $(document).ready(function () {
 
   var searchLimit = 5;
-  var title = "";
 
   // function to search the jikan api for Naruto and log the object and title of the first hit
   var performSearch = function (term, limit) {
@@ -17,31 +16,14 @@ $(document).ready(function () {
     $.ajax({
       url: queryURL,
       method: "GET"
-    }).then(function (vidResponse) {
+    }).then(function(vidResponse){
       var data = vidResponse.items[0];
       var video = $("<iframe>");
-      // video.attr('src', 'https://www.youtube.com/embed/' + data.id.videoId)
-      // video.attr('height', "506")
-      // video.attr('width', "900")
-      var promiseArr = [];
-      // YOUTUBE API
-
-      vidResponse.items.forEach(function(item){
-        // MORE  LOGIC HERE
-
-        promiseArr.push($.ajax({
-          url: 'ebayURL',
-          method: 'GET'
-        }))
-      });
-
-      return Promise.all(promiseArr)
-    }).then(function(result){
-
-      // EBAY API
-    }).then(function(response){
-
-    })
+      video.attr('src', 'https://www.youtube.com/embed/' + data.id.videoId)
+      video.attr('height', "506")
+      video.attr('width', "900")
+      $('body').append(video);
+    });
   };
   youtubeSearch();
 
@@ -67,12 +49,10 @@ $(document).ready(function () {
     var imgURL = result.image_url;
     var image = $("<img>").attr("src", imgURL);
     image.attr("title", result.title);
-    var foo = $('<a>');
-    foo.attr('href', '#');
-    foo.append(image);
+
     // Create the new row
     var newRow = $("<tr>").append(
-      $("<td>").append(foo),
+      $('<td id="newPage">').append(image),
       $("<td>").text(result.title),
       $("<td>").text(result.synopsis),
     );
@@ -80,11 +60,10 @@ $(document).ready(function () {
     // Append the new row to the table
     $("table").prepend(newRow);
     $("table").prepend("<tr><td><br>");
+
   };
 
-  var myFunction = function () {
-    console.log("function");
-  }
+  $("#newPage").click(console.log("function"));
 
 
   $("button").unbind().click(function (event) {
