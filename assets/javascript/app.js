@@ -11,6 +11,9 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 var database = firebase.database();
 
+var searchLimit = 5;
+var newTitle = "";
+
 var validSearches = [];
 // console.log(validSearches);
 
@@ -30,13 +33,14 @@ $(document).ready(function () {
   
   // function to search the jikan api for Naruto and log the object and title of the first hit
   var performSearch = function (term, limit) {
+
     var queryURL = "https://api.jikan.moe/v3/search/anime?q=" + term + "&limit=" + limit;
     $.ajax({
       url: queryURL,
       method: "GET"
     }).then(getResults);
   };
-
+  
   // Take in JSON response from performSearch() and parse out the searchResults
   var getResults = function (reply) {
     var searchResults = reply.results;
@@ -53,6 +57,22 @@ $(document).ready(function () {
     // console.log(validSearches);
   };
 
+  var youtubeSearch = function () {
+  var queryURL = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q="+newTitle+"&key=AIzaSyCHbM4yqSNt5FqVSFSFiMv4IaX7jxQxPJ0";
+  $.ajax({
+    url: queryURL,
+    method: "GET"
+  }).then(function (vidResponse) {
+    console.log(vidResponse)
+    var data = vidResponse.items[5];
+    var video = $("<iframe>");
+    video.attr('src', 'https://www.youtube.com/embed/' + data.id.videoId)
+    video.attr('height', "506")
+    video.attr('width', "2900")
+    $('table').prepend(video);
+  });
+};
+
   //column titles for the table
   var headerRow = $("<th>").append(
     // $("<td>").text("Poster"),
@@ -63,16 +83,22 @@ $(document).ready(function () {
 
   // displayResults() to the console (needs to be to the document)
   var displayResults = function (result) {
-    // console.log("------------------------");
-    // console.log(result.title);
-    // console.log(result.image_url);
-    // console.log(result.synopsis);
-    var imgURL = result.image_url;
-    var image = $("<img>").attr("src", imgURL);
+  var imgURL = result.image_url;
+  var image = $("<img>").attr("src", imgURL);
+  var youtube = "Watch trailer on Youtube";
+  var ebay = "Search eBay for DVD";
     console.log(image);
     // Create the new row
     var newRow = $("<div class='row'>").append(
-      $("<div class='col-md-6'>").append($("<div class='imgurl'>").append(result.title, "<br>", image)),
+      $("<div class='col-md-6'>")
+        .attr("title", result.title)
+        .click(function(event){
+          if(event.target.title){
+          newTitle = this.title + " trailer";
+          console.log(newTitle);
+          youtubeSearch();
+          })
+        .append($("<div class='imgurl'>").append(result.title, "<br>", image)),
       $("<div class='col-md-6'>").append($("<div class='textBox'>").text(result.synopsis)),
     );
 
@@ -85,11 +111,8 @@ $(document).ready(function () {
   $("#search-button").unbind().click(function (event) {
     event.preventDefault();
     newSearch = $("#search").val().trim();
-    console.log(newSearch);
+    // console.log(newSearch);
     performSearch(newSearch, searchLimit);
   });
 
-
-  // searchTerm = "Ghost in the Shell"
-  // performSearch(searchTerm, searchLimit);
 });
