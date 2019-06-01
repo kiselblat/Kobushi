@@ -22,7 +22,6 @@ database.ref().on('value' , function(snapshot){
   $( "#search" ).autocomplete({
     source: validSearches
   });
-  
   console.log(validSearches);
 });
 
@@ -46,9 +45,9 @@ $(document).ready(function () {
     var searchResults = reply.results;
     console.log(searchResults);
     for (var i = 0; i < searchResults.length; i++) {
-      if (!validSearches.includes) {
+      if (!validSearches.includes(searchResults[i].title)) {
         validSearches.push(searchResults[i].title);    
-      }
+      };
       displayResults(searchResults[i]);
     }
     database.ref().set({
