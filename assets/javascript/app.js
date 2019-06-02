@@ -70,7 +70,7 @@ $(document).ready(function () {
       video.attr('src', 'https://www.youtube.com/embed/' + data.id.videoId)
       video.attr('height', "506")
       video.attr('width', "2900")
-      $('table').prepend(video);
+      $('#vidSpace').prepend(video);
     });
   };
 
@@ -95,9 +95,9 @@ $(document).ready(function () {
           newTitle = this.title + " trailer";
           console.log(newTitle);
           youtubeSearch();
-        },
-          $("<div class='col-md-2'>").append($("<div class='textBox'>").append(a)).text(ebay),
-        ));
+        }),
+      $("<div class='col-md-2'>").append($("<div class='textBox'>").append($("<a>").attr("href", ebayURL)).text(ebay),
+      ));
 
     // Append the new row to the table
     $(".results-display").prepend(newRow);
