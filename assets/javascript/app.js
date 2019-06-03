@@ -13,7 +13,6 @@ var database = firebase.database();
 
 var searchLimit = 5;
 var newTitle = "";
-var newDvd = "";
 
 var validSearches = [];
 // console.log(validSearches);
@@ -80,8 +79,9 @@ $(document).ready(function () {
     var image = $("<img>").attr("src", imgURL);
     var youtube = "Watch trailer on Youtube";
     var ebay = "Search eBay for DVD";
+    var newDvd = result.title;
     var ebayURL = "https://www.google.com/search?q=ebay+" + newDvd + "+dvd&source=univ&tbm=shop&tbo=u&sa=X&ved=0ahUKEwieuOKmocviAhVQb60KHcYdCbgQsxgILQ&biw=1600&bih=757"
-    var a = $("<a>").attr("href", ebayURL);
+    var a = $("<a>").attr("href", ebayURL).text(ebay);
     console.log(image);
     // Create the new row
     var newRow = $("<div class='row'>").append(
@@ -96,8 +96,8 @@ $(document).ready(function () {
           console.log(newTitle);
           youtubeSearch();
         }),
-      $("<div class='col-md-2'>").append($("<div class='textBox'>").append($("<a>").attr("href", ebayURL)).text(ebay),
-      ));
+      $("<div class='col-md-2'>").append($("<div class='textBox'>").append(a)),
+      );
 
     // Append the new row to the table
     $(".results-display").prepend(newRow);
